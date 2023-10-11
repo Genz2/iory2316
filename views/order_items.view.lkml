@@ -27,7 +27,7 @@ view: order_items {
   }
   dimension_group: returned {
     type: time
-    timeframes: [raw, time, date, week, month, quarter, year]
+    timeframes: [raw, time, date, week, quarter, year]
     sql: ${TABLE}.returned_at ;;
   }
   dimension: sale_price {
@@ -36,6 +36,6 @@ view: order_items {
   }
   measure: count {
     type: count
-    drill_fields: [id, orders.id, inventory_items.id]
+    drill_fields: [id]
   }
 }

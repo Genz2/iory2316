@@ -53,19 +53,41 @@ view: users {
     type: count
     drill_fields: [detail*]
   }
+  dimension: full_name {
+    type: string
+    sql: concat(${first_name}," ",${last_name}) ;;
+  }
+  dimension: length_name{
+    type: number
+    sql:LENGTH(REPLACE(${full_name}," ","")) ;;
+  }
+
+  dimension: age_tier{
+    type: tier
+    tiers: [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    sql: ${age} ;;
+    style: integer
+  }
+
+
+  measure: average_age {
+    type: average
+    sql: ${age} ;;
+  }
+
 
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
-	id,
-	first_name,
-	last_name,
-	events.count,
-	orders.count,
-	saralooker.count,
-	sindhu.count,
-	user_data.count
-	]
+  id,
+  first_name,
+  last_name,
+  events.count,
+  orders.count,
+  saralooker.count,
+  sindhu.count,
+  user_data.count
+  ]
   }
 
 }
